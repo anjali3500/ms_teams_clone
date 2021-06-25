@@ -116,3 +116,38 @@ const playStop = () => {
   }
 };
 
+const muteUnmute = () => {
+  const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getAudioTracks()[0].enabled = false;
+    setUnmuteButton();
+  } else {
+    setMuteButton();
+    myVideoStream.getAudioTracks()[0].enabled = true;
+  }
+};
+
+const setPlayVideo = () => {
+  const html = `<i class="unmute fa fa-pause-circle"></i>
+  <span class="unmute">Resume Video</span>`;
+  document.getElementById("playPauseVideo").innerHTML = html;
+};
+
+const setStopVideo = () => {
+  const html = `<i class=" fa fa-video-camera"></i>
+  <span class="">Pause Video</span>`;
+  document.getElementById("playPauseVideo").innerHTML = html;
+};
+
+const setUnmuteButton = () => {
+  const html = `<i class="unmute fa fa-microphone-slash"></i>
+  <span class="unmute">Unmute</span>`;
+  document.getElementById("muteButton").innerHTML = html;
+};
+const setMuteButton = () => {
+  const html = `<i class="fa fa-microphone"></i>
+  <span>Mute</span>`;
+  document.getElementById("muteButton").innerHTML = html;
+};
+
+
