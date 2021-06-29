@@ -21,7 +21,9 @@ app.get("/", (req, rsp) => {
   var name = 5560
   
   //alert("Your name is " + name);
-    rsp.redirect(`/${name}`)
+    //rsp.redirect(`/${name}`)
+
+    rsp.redirect(`/${uuidv4()}`);
   
 
   
