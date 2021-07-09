@@ -1,5 +1,6 @@
 const socket = io("/");
 const chatInputBox = document.getElementById("chat_message");
+const chatInputname = document.getElementById("nameo");
 const all_messages = document.getElementById("all_messages");
 const main__chat__window = document.getElementById("main__chat__window");
 const videoGrid = document.getElementById("video-grid");
@@ -43,15 +44,15 @@ navigator.mediaDevices
 
     document.addEventListener("keydown", (e) => {
       if (e.which === 13 && chatInputBox.value != "") {
-        socket.emit("message", chatInputBox.value);
+        socket.emit("message", chatInputBox.value,chatInputname.value);
         chatInputBox.value = "";
       }
     });
 
-    socket.on("createMessage", (msg) => {
+    socket.on("createMessage", (msg,na) => {
       console.log(msg);
       let li = document.createElement("li");
-      li.innerHTML = msg;
+      li.innerHTML = na+":"+msg;
       all_messages.append(li);
       main__chat__window.scrollTop = main__chat__window.scrollHeight;
     });
