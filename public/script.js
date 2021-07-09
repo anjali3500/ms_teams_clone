@@ -9,7 +9,7 @@ myVideo.muted = true;
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: "443",
+  port: "3030",
 });
 
 let myVideoStream;
@@ -149,5 +149,3 @@ const setMuteButton = () => {
   <span>Mute</span>`;
   document.getElementById("muteButton").innerHTML = html;
 };
-
-

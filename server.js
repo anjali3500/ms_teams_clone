@@ -6,7 +6,6 @@ const io = require("socket.io")(server);
 // Peer
 
 const { ExpressPeerServer } = require("peer");
-const { render } = require("ejs");
 const peerServer = ExpressPeerServer(server, {
   debug: true,
 });
@@ -16,20 +15,8 @@ app.use(express.static("public"));
 app.use("/peerjs", peerServer);
 
 app.get("/", (req, rsp) => {
-
-  
-  var name = 5560
-  
-  //alert("Your name is " + name);
-    //rsp.redirect(`/${name}`)
-
-    rsp.redirect(`/${uuidv4()}`);
-  
-
-  
-    
+  rsp.redirect(`/${uuidv4()}`);
 });
-//rsp.redirect(`/${uuidv4()}`);
 
 app.get("/:room", (req, res) => {
   res.render("room", { roomId: req.params.room });
