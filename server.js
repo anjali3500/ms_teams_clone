@@ -3,6 +3,23 @@ const app = express();
 const server = require("http").Server(app);
 const { v4: uuidv4 } = require("uuid");
 const io = require("socket.io")(server);
+
+const users={};
+// new here
+// const Mongoose=require('mongoose')
+// const Schema=Mongoose.Schema
+
+// const test=new Schema({
+//     value:{
+//         type:String
+//     }
+// })
+
+// new here end
+
+
+
+
 // Peer
 
 const { ExpressPeerServer } = require("peer");
@@ -23,12 +40,21 @@ app.get("/:room", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  socket.on("join-room", (roomId, userId) => {
-    socket.join(roomId);
-    socket.to(roomId).broadcast.emit("user-connected", userId);
 
-    socket.on("message", (message,na) => {
-      io.to(roomId).emit("createMessage", message,na);
+  socket.on("join-room", (roomId, userId,na) => {
+     users[socket.id]=na;
+    socket.join(roomId);
+    socket.to(roomId).broadcast.emit("user-connected", userId,na);
+
+
+    
+    socket.on("message", (mess,na) => {
+      io.to(roomId).emit("createMessage", mess,na);
+    });
+
+    socket.on("disconnect", na => {
+      io.to(roomId).emit("leave", na);
+      delete users[socket.id];
     });
   });
 });
