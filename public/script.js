@@ -13,7 +13,7 @@ const name=prompt("enter your name");
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
-  port: "443",
+  port: "3030",
 });
 
 let myVideoStream;
@@ -83,6 +83,15 @@ navigator.mediaDevices
       let li = document.createElement("li");
      
       li.innerHTML = na+":"+mess;
+      all_messages.append(li);
+      if(mess=="participants?"){
+        let totalUsers = document.getElementsByTagName("video").length;
+         console.log(totalUsers);
+        li.innerHTML="Total participants in the meeting are:"+totalUsers;
+      }
+
+      
+      
       all_messages.append(li);
       main__chat__window.scrollTop = main__chat__window.scrollHeight;
     });
